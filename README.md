@@ -59,8 +59,40 @@ if (1 != decimal.scale()){
 
 Assert.assertTrue(errors.toString(), 0 == errors.length());
 ```
-Looks like this is not perfect way to solve issue :) This is actually what [Soft Assertions](#soft-assertions) do for you.
+This is not perfect way to solve issue obviously :) 
+
+So, problem described above is actually what [Soft Assertions](#soft-assertions) do for you.
 
 ## Soft Assertions
+
+Let's try to re-write example above in soft-assert style:
+
+```java
+BigDecimal decimal = BigDecimal.valueOf(-0.05);
+
+/* check value is positive. Provided value is negative, but we haven't got error */
+SmartAssert.expect(decimal.signum(), CoreMatchers.is(1), "Positive value is expected!").assertSoft();
+
+/* check value has scale == 1. Provided value's scale is '2', so we haven't got error assertion here */
+SmartAssert.expect(decimal.scale(), CoreMatchers.is(1), "Incorrect decimal scale!").assertSoft();
+
+/* Here is place were real assertion will be thrown */
+SmartAssert.validateSoftAsserts();
+```
+
+Using smartassert you are able to write assertions in junit/testNG style, but perform real validation on demand (basically, at the end of the method). All failures will be accumulated into one:
+>
+com.smarttested.qa.smartassert.SoftAssertException: The following assert has been failed:  
+Positive value is expected!  
+Expected: is <1>  
+     but: was <-1>  
+Incorrect decimal scale!  
+Expected: is <1>  
+     but: was <2>  
+	at com.smarttested.qa.smartassert.SoftFailuresHolder.getException(SoftFailuresHolder.java:62)  
+	at com.smarttested.qa.smartassert.SoftFailuresHolder.validate(SoftFailuresHolder.java:52)  
+	at com.smarttested.qa.smartassert.SmartAssert.validateSoftAsserts(SmartAssert.java:134)  
+	at com.smarttested.qa.smartassert.SoftAssertTest.testBigDecimal(SoftAssertTest.java:27)  
+>
 
 ## TestNG Integration
