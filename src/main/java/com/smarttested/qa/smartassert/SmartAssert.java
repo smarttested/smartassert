@@ -130,7 +130,7 @@ public class SmartAssert {
 	 * Check soft failures and if there any throws exception and clears holder
 	 * for current thread
 	 */
-	public static void throwSoftFailures() {
+	public static void validateSoftAsserts() {
 		BaseValidator.SOFT_FAILURES.validate();
 	}
 

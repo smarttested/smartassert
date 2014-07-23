@@ -21,7 +21,7 @@ package com.smarttested.qa.smartassert;
  * @author Andrei Varabyeu
  * 
  */
-public class AssertException extends RuntimeException {
+public class AssertException extends AssertionError {
 
 	private static final long serialVersionUID = -9160379094725443271L;
 
