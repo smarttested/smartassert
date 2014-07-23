@@ -41,7 +41,25 @@ Assert.assertEquals("Positive value is expected!", 1, decimal.signum());
 Assert.assertEquals("Incorrect decimal scale!", 1, decimal.scale());
 ```
 
-In this case test will fail on first assertion once provided object is not positive, but after test you don't know whether test has right scale!
+In this case test will fail on first assertion once provided object is not positive, but after test you don't know whether test has right scale! Another words, **second assert is not performed**. To solve this issue you might do something like:
+
+```java
+BigDecimal decimal = BigDecimal.valueOf(-0.05);
+StringBuilder errors = new StringBuilder();
+
+/* check value is positive. Provided value is negative, so we've got error assertion here */
+if (1 != decimal.signum()){
+   errors.append("Positive value is expected!");
+}
+
+/* check value has scale == 1. Provided value's scale is '2', so we've got error assertion here */
+if (1 != decimal.scale()){
+   errors.append("Incorrect decimal scale!");
+}
+
+Assert.assertTrue(errors.toString(), 0 == errors.length());
+```
+Looks like this is not perfect way to solve issue :) This is actually what [Soft Assertions](#soft-assertions) do for you.
 
 ## Soft Assertions
 
