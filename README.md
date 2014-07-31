@@ -73,7 +73,7 @@ Assert.assertTrue(errors.toString(), 0 == errors.length());
 ```
 This is not perfect way to solve issue obviously :) 
 
-So, problem described above is actually what [Soft Assertions](#soft-assertions) do for you.
+So, problem described above is actually what [Soft Assertions](#soft-assertions) are doing for you.
 
 ## Soft Assertions
 
