@@ -6,6 +6,7 @@
  2. [Hard Assertions](#hard-assertions)
  3. [Soft Assertions](#soft-assertions)
  4. [TestNG integration](#testng-integration)
+ 5. [Predicates and predefined validators](#predicates-and-predefined-validators)
 
 
 ## HOW-TO
@@ -127,3 +128,6 @@ public class SoftValidationMethodListenerTest {
     }
 }
 ```
+
+## Predicates and predefined validators
+A very good style of writing unit and functional tests is to prepare validators you need and do not duplicate it 
