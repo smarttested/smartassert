@@ -11,7 +11,7 @@
 
 ## HOW-TO
 ```java
-/* Put annotation to let TestNG know you are gonna use SmartAssert */
+/* Put annotation to let TestNG know you gonna use SmartAssert */
 @Listeners(SoftValidationMethodListener.class)
 public class YourUnitTest
 {
