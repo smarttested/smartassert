@@ -82,7 +82,7 @@ SmartAssert.validateSoftAsserts();
 ```
 
 Using smartassert you are able to write assertions in junit/testNG style, but perform real validation on demand (basically, at the end of the method). All failures will be accumulated into one:
->
+```
 com.smarttested.qa.smartassert.SoftAssertException: The following assert has been failed:  
 Positive value is expected!  
 Expected: is <1>  
@@ -94,7 +94,7 @@ Expected: is <1>
 	at com.smarttested.qa.smartassert.SoftFailuresHolder.validate(SoftFailuresHolder.java:52)  
 	at com.smarttested.qa.smartassert.SmartAssert.validateSoftAsserts(SmartAssert.java:134)  
 	at com.smarttested.qa.smartassert.SoftAssertTest.testBigDecimal(SoftAssertTest.java:27)  
->
+```
 
 ## TestNG Integration
 To avoid calling 
@@ -130,4 +130,54 @@ public class SoftValidationMethodListenerTest {
 ```
 
 ## Predicates and predefined validators
-A very good style of writing unit and functional tests is to prepare validators you need and do not duplicate it 
+A very good style of writing unit and functional tests is to prepare validators you need and do not duplicate them in each test. There is a two ways to do that. First, you can use built-in Hamcrest validators:
+```java
+SmartAssert.expect("hello world", CoreMatchers.containsString("hello"), "This validation is passing").assertSoft();
+```
+Hamcrest has a lot of validators which may cover almost all your needs. Of course, you can prepare your own validators by implementing Hamcrest's ```org.hamcrest.Matcher``` interface. More information you can find [here](https://code.google.com/p/hamcrest/) 
+
+Another way to perform validation and making matchers is [Guava's Predicates](https://code.google.com/p/guava-libraries/wiki/FunctionalExplained#Predicates)
+
+Let's consider the following example:
+```java
+@Listeners(SoftValidationMethodListener.class)
+public class SoftAssertTest {
+
+    public static final Predicate<String> STRING_IN_UPPER_CASE = new Predicate<String>() {
+        @Override
+        public boolean apply(String input) {
+            /* validates all symbols in string are whitespaces or upper-case symbols */
+            return CharMatcher.JAVA_UPPER_CASE.or(CharMatcher.WHITESPACE).matchesAllOf(input);
+        }
+
+        /* add toString just to have pretty error message if validator fail on this predicate */
+        @Override
+        public String toString() {
+            return "Upper case validator";
+        }
+    };
+
+    @Test
+    public void testUpperCase() {
+        /* this gonna fail */
+        SmartAssert.expect("lower case", STRING_IN_UPPER_CASE, "String is not in upper case").assertSoft();
+
+        /* this gonna pass */
+        SmartAssert.expect("UPPER CASE", STRING_IN_UPPER_CASE, "String is not in upper case").assertSoft();
+    }
+}
+```
+
+So, by creating your own matchers and predicates you can move your validation logic into separate logic layer and use across all project. You might also want to use this stuff via some dependency injection container (like Guice or Spring) and replace your validators depending on some conditions:
+
+```java
+    
+    /* you can have multiple implementations. For example, one
+     * can validate only upper case symbols, second one can pass
+     * validation with digits and whitespaces, because they do not
+     * have a case at all. 
+     */
+    @Inject
+    @Named("upperCaseValidator")
+    private Predicate<String> upperCaseValidator;
+```
