@@ -70,7 +70,7 @@ class GuavaPredicateValidator<T> extends BaseValidator {
 	public AssertionResult performAssert() {
 		if (!predicate.apply(toValidate)) {
 			StringBuilder errorMessage = new StringBuilder(this.reason).append("\nPredicate [").append(predicate)
-					.append("] expected to be [true], but was [false]");
+					.append("] expected to be [true], but was [false] for object [").append(toValidate).append("]");
 			return AssertionResult.unsuccessfulResult(errorMessage.toString());
 		} else {
 			return AssertionResult.successfulResult();
