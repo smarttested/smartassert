@@ -96,3 +96,34 @@ Expected: is <1>
 >
 
 ## TestNG Integration
+To avoid calling 
+```java
+SmartAssert.validateSoftAsserts();
+```
+we provided TestNG listener which will do that on each test method. Another words, if some test has some faulures, they will be validated after methed/test execution. 
+```java
+@Listeners(SoftValidationMethodListener.class)
+public class SoftValidationMethodListenerTest {
+
+    @Test
+    public void testGuavaSoft() {
+        SmartAssert.expect(true, Predicates.alwaysFalse(), "I'm an error!").assertSoft();
+        SmartAssert.expect(true, Predicates.alwaysFalse(), "it's ok").assertSoft();
+        SmartAssert.expect(true, Predicates.alwaysFalse(), "I'm an second error!").assertSoft();
+    }
+}
+```
+This method fails with description of all three failed validations. 
+Sometimes you need to write negative test which is expects some error. SoftValidationMethodListener support default TestNG behavior so this test pass, because expected exception is specified in TestNG annotation:
+```java
+@Listeners(SoftValidationMethodListener.class)
+public class SoftValidationMethodListenerTest {
+
+    @Test(expectedExceptions = {SoftAssertException.class, SkipException.class})
+    public void testGuavaSoft() {
+        SmartAssert.expect(true, Predicates.alwaysFalse(), "I'm an error!").assertSoft();
+        SmartAssert.expect(true, Predicates.alwaysFalse(), "it's ok").assertSoft();
+        SmartAssert.expect(true, Predicates.alwaysFalse(), "I'm an second error!").assertSoft();
+    }
+}
+```
