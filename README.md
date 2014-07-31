@@ -107,6 +107,18 @@ Expected: is <1>
 	at com.smarttested.qa.smartassert.SoftAssertTest.testBigDecimal(SoftAssertTest.java:27)  
 ```
 
+
+Actually, there is a still way to use hard asserts:
+```java
+SmartAssert.expect(true, Predicates.alwaysFalse(), "I'm an error!").assertHard();
+```
+or
+```java
+SmartAssert.expect(true, Predicates.alwaysFalse(), "I'm an error!").assertHard(SomeYourCustomException.class);
+```
+if you wonna some custom exception to be raised here. 
+
+
 ## TestNG Integration
 To avoid calling 
 ```java
@@ -139,18 +151,6 @@ public class SoftValidationMethodListenerTest {
     }
 }
 ```
-
-Actually, there is a still way to use hard asserts:
-```java
-SmartAssert.expect(true, Predicates.alwaysFalse(), "I'm an error!").assertHard();
-```
-
-or
-
-```java
-SmartAssert.expect(true, Predicates.alwaysFalse(), "I'm an error!").assertHard(SomeYourCustomException.class);
-```
-if you wonna some custom exception to be raised here. 
 
 ## Predicates and predefined validators
 A very good style of writing unit and functional tests is to prepare validators you need and do not duplicate them in each test. There is a two ways to do that. First, you can use built-in Hamcrest validators:
