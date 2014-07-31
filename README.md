@@ -11,6 +11,8 @@
 
 ## HOW-TO
 ```java
+/* Put annotation to let TestNG know you are gonna use SmartAssert */
+@Listeners(SoftValidationMethodListener.class)
 public class YourUnitTest
 {
 
@@ -18,8 +20,17 @@ public class YourUnitTest
    @Test
    public void testYourBusinessLogic()
    {
-
+      /* Add validation of logic you wonna check */
+      
+      SmartAssert.expect(Lists.newArrayList("one", "two"), CoreMatchers.hasItem("three"), "There is no 'three'!")
+      	.assertSoft();
+      SmartAssert.expect(true, CoreMatchers.is(false), "True is not false!").assertSoft();
+      
+      /* add another validations you need. First one won't fail this test */
+      System.out.println("Validations failed, but test still works!")
    }
+   
+   /* Enjoy! Once test is finished, it will fail with all failed validations it had! */
 }
 ```
 
@@ -128,6 +139,18 @@ public class SoftValidationMethodListenerTest {
     }
 }
 ```
+
+Actually, there is a still way to use hard asserts:
+```java
+SmartAssert.expect(true, Predicates.alwaysFalse(), "I'm an error!").assertHard();
+```
+
+or
+
+```java
+SmartAssert.expect(true, Predicates.alwaysFalse(), "I'm an error!").assertHard(SomeYourCustomException.class);
+```
+if you wonna some custom exception to be raised here. 
 
 ## Predicates and predefined validators
 A very good style of writing unit and functional tests is to prepare validators you need and do not duplicate them in each test. There is a two ways to do that. First, you can use built-in Hamcrest validators:
