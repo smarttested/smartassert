@@ -6,7 +6,7 @@
  2. [Hard Assertions](#hard-assertions)
  3. [Soft Assertions](#soft-assertions)
  4. [TestNG integration](#testng-integration)
- 5. [Predicates and predefined validators](#predicates-and-predefined-validators)
+ 5. [Predicates and Predefined Validators](#predicates-and-predefined-validators)
 
 
 ## HOW-TO
@@ -152,7 +152,7 @@ public class SoftValidationMethodListenerTest {
 }
 ```
 
-## Predicates and predefined validators
+## Predicates and Predefined Validators
 A very good style of writing unit and functional tests is to prepare validators you need and do not duplicate them in each test. There is a two ways to do that. First, you can use built-in Hamcrest validators:
 ```java
 SmartAssert.expect("hello world", CoreMatchers.containsString("hello"), "This validation is passing").assertSoft();
