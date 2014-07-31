@@ -172,10 +172,10 @@ So, by creating your own matchers and predicates you can move your validation lo
 
 ```java
     
-    /* you can have multiple implementations. For example, one
+    /* you can have multiple implementations. For example, first one
      * can validate only upper case symbols, second one can pass
      * validation with digits and whitespaces, because they do not
-     * have a case at all. 
+     * have case at all. 
      */
     @Inject
     @Named("upperCaseValidator")
