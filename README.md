@@ -2,12 +2,23 @@
 *SmartAsserts* is a set of utils which is used to provide the simplest way to perform 'hard' and 'soft' (delayed) assertions.
 
 ## Guidline:
- 1. **[HOW TO (As simple as it is possible)](#how-to)**
- 2. [Hard Assertions](#hard-assertions)
- 3. [Soft Assertions](#soft-assertions)
- 4. [TestNG integration](#testng-integration)
- 5. [Predicates and Predefined Validators](#predicates-and-predefined-validators)
+ 1. [Maven Dependency](#maven-dependency) 
+ 2. **[HOW TO (As simple as it is possible)](#how-to)**
+ 3. [Hard Assertions](#hard-assertions)
+ 4. [Soft Assertions](#soft-assertions)
+ 5. [TestNG integration](#testng-integration)
+ 6. [Predicates and Predefined Validators](#predicates-and-predefined-validators)
 
+## Maven Dependency
+
+Last version:
+```xml
+<dependency>
+    <groupId>com.smarttested</groupId>
+    <artifactId>smartassert</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
 
 ## HOW-TO
 ```java
