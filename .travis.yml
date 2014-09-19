@@ -8,6 +8,8 @@ notifications:
     recipients:
       - andrei.varabyeu@gmail.com
 
+  flowdock: 6650b485eed5e3d59ff3e3b6e89f76a3
+
 branches:
   only:
     - master
