@@ -1,4 +1,5 @@
-# SmartAsserts [![Build Status](https://smarttested.ci.cloudbees.com/buildStatus/icon?job=smartassert)](https://smarttested.ci.cloudbees.com/job/smartassert/)
+# SmartAsserts https://travis-ci.org/smarttested/smartassert.svg?branch=master
+
 *SmartAsserts* is a set of utils which is used to provide the simplest way to perform 'hard' and 'soft' (delayed) assertions.
 
 ## Guidline:
