@@ -30,7 +30,7 @@ package com.smarttested.qa.smartassert;
  * @author Andrei Varabyeu
  * 
  */
-abstract class BaseValidator {
+public abstract class BaseValidator {
 
 	/**
 	 * Soft failures holder. Contains failures on per-thread basis

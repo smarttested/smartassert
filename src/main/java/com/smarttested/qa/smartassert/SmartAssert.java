@@ -113,7 +113,7 @@ public class SmartAssert {
 	 * @param message
 	 *            - Error message
 	 */
-	public static <T> void verifyHard(T object, Matcher<? super T> matcher, String message) {
+	public static <T> void assertHard(T object, Matcher<? super T> matcher, String message) {
 		expect(object, matcher, message).assertHard();
 	}
 
