@@ -71,14 +71,14 @@ public class ValidatorTest {
         SmartAssert.expect(true, CoreMatchers.is(false), SOME_ERROR_MESSAGE).assertHard(IncorrectCustomException.class);
     }
 
-    @Test
+    //@Test
     public void testHamcrestSoft() {
         SmartAssert.expect(true, CoreMatchers.is(false), "I'm an error!").assertSoft();
         SmartAssert.expect(true, CoreMatchers.is(true), "it's ok").assertSoft();
         SmartAssert.expect(true, CoreMatchers.is(false), "I'm an second error!").assertSoft();
     }
 
-    @Test
+    //@Test
     public void testGuavaSoft() {
         SmartAssert.expect(true, Predicates.alwaysFalse(), "I'm an error!").assertSoft();
         SmartAssert.expect(true, Predicates.alwaysFalse(), "it's ok").assertSoft();
