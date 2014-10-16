@@ -1,4 +1,5 @@
-# SmartAsserts [![Build Status](https://travis-ci.org/smarttested/smartassert.svg?branch=master)](https://travis-ci.org/smarttested/smartassert)
+# SmartAsserts [![Build Status](https://travis-ci.org/smarttested/smartassert.svg?branch=master)](https://travis-ci.org/smarttested/smartassert) [![Maven central](https://maven-badges.herokuapp.com/maven-central/com.smarttested/smartassert/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.smarttested/smartassert)
+
 
 *SmartAsserts* is a set of utils which is used to provide the simplest way to perform 'hard' and 'soft' (delayed) assertions.
 
